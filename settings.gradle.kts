@@ -2,6 +2,7 @@ rootProject.name = "WERU"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    @Suppress("UnstableApiUsage")
     repositories {
         google {
             mavenContent {
@@ -16,6 +17,7 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
     repositories {
         google {
             mavenContent {
