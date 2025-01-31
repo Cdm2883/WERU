@@ -1,9 +1,20 @@
 package vip.cdms.weru.ui.theme
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.toComposeImageBitmap
 import com.materialkolor.ktx.themeColorOrNull
 import com.materialkolor.rememberDynamicColorScheme
+import com.mayakapps.compose.windowstyler.WindowBackdrop
+import com.mayakapps.compose.windowstyler.WindowCornerPreference
+import com.mayakapps.compose.windowstyler.WindowFrameStyle
+import com.mayakapps.compose.windowstyler.WindowStyle
+import vip.cdms.weru.LocalWindowScope
 import java.io.File
 import javax.imageio.ImageIO
 
@@ -24,11 +35,29 @@ actual fun AppTheme(
             ?: defaultColorScheme
     }
 
-    AppTheme0(
-        colorScheme,
-        extendedColorScheme,
-        content
+    LocalWindowScope.current.WindowStyle(
+        isDarkTheme = darkTheme,
+        backdropType = WindowBackdrop.Solid(colorScheme.primary),
+        frameStyle = WindowFrameStyle(
+            borderColor = colorScheme.primary,
+            titleBarColor = colorScheme.primary,
+            captionColor = colorScheme.onPrimary,
+            cornerPreference = WindowCornerPreference.ROUNDED,
+        ),
     )
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .clip(ShapeDefaults.Small)
+            .background(colorScheme.surface)
+    ) {
+        AppTheme0(
+            colorScheme,
+            extendedColorScheme,
+            content
+        )
+    }
 }
 
 fun getWallpaper() = runCatching {  // holy shit, lines too long
