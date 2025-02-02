@@ -27,7 +27,7 @@ actual fun AppTheme(
 ) {
     val (defaultColorScheme, extendedColorScheme) = getDefaultColorSchemes(darkTheme, contrast)
 
-    val colorScheme = if (contrast != Contrast.Normal) defaultColorScheme else {
+    val colorScheme = if (!dynamicColor || contrast != Contrast.Normal) defaultColorScheme else {
         getWallpaper()
             ?.toComposeImageBitmap()
             ?.themeColorOrNull()
