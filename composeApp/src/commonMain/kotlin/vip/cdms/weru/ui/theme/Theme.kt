@@ -9,6 +9,8 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -532,6 +534,11 @@ private val LocalExtendedColorScheme = staticCompositionLocalOf { extendedLight 
 val MaterialTheme.extendedColorScheme
     @Composable @ReadOnlyComposable get() = LocalExtendedColorScheme.current
 
+private val LocalIsDarkTheme = staticCompositionLocalOf { false }
+@Suppress("UnusedReceiverParameter")
+val MaterialTheme.isDarkTheme
+    @Composable @ReadOnlyComposable get() = LocalIsDarkTheme.current
+
 enum class Contrast { Normal, Medium, High }
 
 internal fun getDefaultColorSchemes(darkTheme: Boolean, contrast: Contrast) = when {
@@ -549,10 +556,12 @@ internal fun getDefaultColorSchemes(darkTheme: Boolean, contrast: Contrast) = wh
 
 @Composable
 internal fun AppTheme0(
+    darkTheme: Boolean,
     colorScheme: ColorScheme,
     extendedColorScheme: ExtendedColorScheme,
     content: @Composable () -> Unit
 ) = CompositionLocalProvider(
+    LocalIsDarkTheme provides darkTheme,
     LocalExtendedColorScheme provides extendedColorScheme,
 ) {
     MaterialTheme(

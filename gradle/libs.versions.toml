@@ -12,6 +12,9 @@ jordond-material-kolor = "2.0.1"
 mayakapps-compose-window-styler = "0.3.3-SNAPSHOT"
 
 [libraries]
+# jetbrains-compose-material3-window-size-clazz = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "compose-multiplatform" }  # CMP-5956
+chrisbanes-material3-window-size-clazz = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version = "0.5.0" }
+
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }

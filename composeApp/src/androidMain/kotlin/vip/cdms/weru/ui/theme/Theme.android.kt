@@ -33,6 +33,7 @@ actual fun AppTheme(
             .background(colorScheme.surface)
     ) {
         AppTheme0(
+            darkTheme,
             colorScheme,
             extendedColorScheme,
             content

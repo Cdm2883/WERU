@@ -26,11 +26,14 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(compose.runtime)
+            implementation(compose.ui)
             implementation(compose.foundation)
             implementation(compose.material3)
-            implementation(compose.ui)
+            implementation(compose.material3AdaptiveNavigationSuite)
+            implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.chrisbanes.material3.window.size.clazz)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

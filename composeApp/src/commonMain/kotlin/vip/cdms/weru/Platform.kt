@@ -1,7 +1,9 @@
 package vip.cdms.weru
 
-interface Platform {
-    val name: String
+sealed interface Platform {
+    interface Desktop : Platform
+    interface Android : Platform
 }
 
-expect fun getPlatform(): Platform
+internal expect fun getPlatform(): Platform
+val RuntimePlatform by lazy { getPlatform() }
