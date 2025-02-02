@@ -40,6 +40,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.jordond.material.kolor)
             implementation(libs.mayakapps.compose.window.styler)
+            implementation(libs.dzirbel.compose.material.context.menu)
         }
     }
 }

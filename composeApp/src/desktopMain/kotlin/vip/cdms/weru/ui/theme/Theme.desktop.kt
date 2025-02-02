@@ -1,13 +1,21 @@
 package vip.cdms.weru.ui.theme
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.LocalContextMenuRepresentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ShapeDefaults
+import androidx.compose.foundation.text.LocalTextContextMenu
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.toComposeImageBitmap
+import com.dzirbel.contextmenu.ContextMenuColors
+import com.dzirbel.contextmenu.MaterialContextMenuRepresentation
+import com.dzirbel.contextmenu.MaterialTextContextMenu
 import com.materialkolor.ktx.themeColorOrNull
 import com.materialkolor.rememberDynamicColorScheme
 import com.mayakapps.compose.windowstyler.WindowBackdrop
@@ -18,6 +26,7 @@ import vip.cdms.weru.LocalWindowScope
 import java.io.File
 import javax.imageio.ImageIO
 
+@OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
 @Composable
 actual fun AppTheme(
     darkTheme: Boolean,
@@ -46,18 +55,31 @@ actual fun AppTheme(
         ),
     )
 
-    Box(
-        Modifier
-            .fillMaxSize()
-            .clip(ShapeDefaults.Small)
-            .background(colorScheme.surface)
+    AppTheme0(
+        darkTheme,
+        colorScheme,
+        extendedColorScheme
     ) {
-        AppTheme0(
-            darkTheme,
-            colorScheme,
-            extendedColorScheme,
-            content
-        )
+        Box(
+            Modifier
+                .fillMaxSize()
+                .clip(MaterialTheme.shapes.small)
+                .background(colorScheme.surface)
+        ) {
+            CompositionLocalProvider(
+                LocalContextMenuRepresentation provides MaterialContextMenuRepresentation(
+                    colors = ContextMenuColors(
+                        surface = MenuDefaults.containerColor,
+                        text = MenuDefaults.itemColors().textColor,
+                        shortcutText = MenuDefaults.itemColors().trailingIconColor,
+                        icon = MenuDefaults.itemColors().leadingIconColor,
+                        divider = DividerDefaults.color,
+                    )
+                ),
+                LocalTextContextMenu provides MaterialTextContextMenu,
+                content = content
+            )
+        }
     }
 }
 
